@@ -10,9 +10,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
 --- !u!1 &1205966136548227427
 GameObject:
@@ -71,6 +71,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -94,6 +97,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &2091529568062276105
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -104,9 +108,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 05f88ce234899e54bb24ea443ff313f5, type: 3}
 --- !u!64 &8162292641251378497
 MeshCollider:
@@ -118,9 +122,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
 --- !u!1001 &436642621818967549
 PrefabInstance:
@@ -132,6 +136,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
       propertyPath: m_Name
       value: Shotgun4_03_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -146,6 +154,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -156,14 +168,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -185,14 +189,12 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
 --- !u!1 &436642621818999645 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 48028e3fa267cfd419d52212a54f5bd8,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
   m_PrefabInstance: {fileID: 436642621818967549}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &436642621819359101 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 48028e3fa267cfd419d52212a54f5bd8, type: 3}
   m_PrefabInstance: {fileID: 436642621818967549}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5214965401951631534
@@ -207,6 +209,10 @@ PrefabInstance:
       value: Shotgun4_03_3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0384
       objectReference: {fileID: 0}
@@ -219,6 +225,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -229,14 +239,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -258,13 +260,11 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
 --- !u!1 &5214965401951600142 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: db4a11cf7fbcf8645bfc924abac3ffb3,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
   m_PrefabInstance: {fileID: 5214965401951631534}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5214965401951232558 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: db4a11cf7fbcf8645bfc924abac3ffb3, type: 3}
   m_PrefabInstance: {fileID: 5214965401951631534}
   m_PrefabAsset: {fileID: 0}

@@ -52,6 +52,11 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+
+        if(isEquipped)
+        {
+            
+        }
     }
 
     private void Update()
@@ -119,7 +124,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void PickUp(Transform weaponHolder, Transform playerCamera)
+    public void EquipWeapon(Transform weaponHolder, Transform playerCamera)
     {
         if (isEquipped)
             return;
@@ -141,16 +146,17 @@ public class Weapon : MonoBehaviour
     {
         if (!isEquipped)
             return;
-        _rb.isKinematic = false;
-        var forward = playerCamera.forward;
-        _rb.AddForce(forward * 10, ForceMode.Impulse);
-        
+
         foreach (var col in gfxColliders)
         {
             col.isTrigger = false;
         }
         transform.parent = null;
+        _rb.isKinematic = false;
         isEquipped = false;
+
+        var forward = playerCamera.forward;
+        _rb.AddForce(forward * 10, ForceMode.Impulse);
     }
 
     IEnumerator CoResetFireLock()

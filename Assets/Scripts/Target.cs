@@ -5,8 +5,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public float health;
-    public GameObject hitEffect;
-    public GameObject deathBloodPrefab;
+    private GameObject hitEffect;
     EnemyHPBar hpBar;
 
     private void Awake()
@@ -32,7 +31,6 @@ public class Target : MonoBehaviour
 
     private void OnDead()
     {
-        Instantiate(deathBloodPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
