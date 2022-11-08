@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
-    public Transform cameraPosition;
+    public Transform cameraTransform;
+    public Vector3 cameraOffset; // Offset of the camera from the player.
 
     private void Update()
     {
-        transform.position = cameraPosition.position;
+        CameraFollow();
+    }
+
+    private void CameraFollow()
+    {
+        Vector3 targetCamPos = cameraTransform.position + cameraOffset;
+        transform.position = targetCamPos;
     }
 }
