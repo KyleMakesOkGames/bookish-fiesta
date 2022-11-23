@@ -5,45 +5,79 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public LayerMask whatIsGround, whatIsPlayer;
+
     public float health = 200f;
     public bool isDead = false;
 
     public Collider hitbox;
 
-    public float lookRadius;
     public Transform player;
     public NavMeshAgent agent;
     public Animator animator;
 
     public Ragdoll humanoid;
 
-    public AudioClip[] takingDamageSounds;
-    private List<AudioClip> potentialDamageSounds;
-    private AudioClip lastSoundPlayed;
+    //Patroling
+    public Vector3 walkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
 
-    public AudioSource source;
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject projectile;
+
+    //States
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
+
 
     private void Start()
     {
         hitbox.enabled = true;
+        player = GameObject.Find("Player").transform;
     }
 
     private void Update()
     {
         if (isDead)
             return;
-        float distance = Vector3.Distance(player.position, transform.position);
 
-        if(distance <= lookRadius)
-        {
-            agent.SetDestination(player.position);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
-            if(distance <= agent.stoppingDistance)
-            {
-                FaceTarget();   
-            }
-        }
-        animator.SetFloat("Speed", agent.velocity.magnitude);
+        if (!playerInSightRange && !playerInAttackRange) Patroling();
+        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        //animator.SetFloat("Speed", agent.velocity.magnitude);
+    }
+
+    private void Patroling()
+    {
+        if (!walkPointSet) SearchWalkPoint();
+
+        if (walkPointSet)
+            agent.SetDestination(walkPoint);
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        //Walkpoint reached
+        if (distanceToWalkPoint.magnitude < 1f)
+            walkPointSet = false;
+    }
+
+    private void SearchWalkPoint()
+    {
+        //Calculate random point in range
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+            walkPointSet = true;
     }
 
     private void FaceTarget()
@@ -53,12 +87,23 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
+    private void ChasePlayer()
+    {
+        agent.SetDestination(player.position);
+        FaceTarget();
+    }
+
+    private void AttackPlayer()
+    {
+        agent.SetDestination(transform.position);
+        FaceTarget();
+    }
+
     public void TakeDamage(float amount)
     {
         if (isDead)
             return;
         health -= amount;
-        PlayRandomDamageSound();
         if (health <= 0f)
         {
             Die();
@@ -71,23 +116,6 @@ public class Enemy : MonoBehaviour
         hitbox.enabled = false;
         animator.enabled = false;
         agent.enabled = false;
-        humanoid.ActivateRagdoll();
-    }
-
-    public void PlayRandomDamageSound()
-    {
-        potentialDamageSounds = new List<AudioClip>();
-
-        foreach (var damageSound in takingDamageSounds)
-        {
-            if(damageSound != lastSoundPlayed)
-            {
-                potentialDamageSounds.Add(damageSound);
-            }
-        }
-
-        int randomValue = Random.Range(0, potentialDamageSounds.Count);
-        lastSoundPlayed = takingDamageSounds[randomValue];
-        source.PlayOneShot(takingDamageSounds[randomValue]);
+        humanoid.EnableRagdoll();
     }
 }
