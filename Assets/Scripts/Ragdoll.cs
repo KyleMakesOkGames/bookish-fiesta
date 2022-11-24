@@ -15,12 +15,16 @@ public class Ragdoll : MonoBehaviour
     private bool StartRagdoll = false;
     private Rigidbody[] Rigidbodies;
     private CharacterJoint[] Joints;
-    public Collider hitbox;
 
     private void Awake()
     {
         Rigidbodies = RagdollRoot.GetComponentsInChildren<Rigidbody>();
         Joints = RagdollRoot.GetComponentsInChildren<CharacterJoint>();
+
+        foreach (CharacterJoint joint in Joints)
+        {
+            joint.enableCollision = true;
+        }
     }
 
     private void Start()
@@ -37,7 +41,6 @@ public class Ragdoll : MonoBehaviour
 
     public void EnableRagdoll()
     {
-        hitbox.enabled = false;
         Animator.enabled = false;
         Agent.enabled = false;
         foreach (CharacterJoint joint in Joints)
@@ -56,7 +59,6 @@ public class Ragdoll : MonoBehaviour
     {
         foreach (Rigidbody rigidbody in Rigidbodies)
         {
-            rigidbody.detectCollisions = false;
             rigidbody.useGravity = false;
             rigidbody.isKinematic = true;
         }
@@ -75,6 +77,14 @@ public class Ragdoll : MonoBehaviour
             //rigidbody.detectCollisions = false;
             rigidbody.useGravity = false;
             rigidbody.isKinematic = true;
+        }
+    }
+
+    public void ApplyForceToRagdoll(Vector3 hitPoint, float amountOfForce)
+    {
+        foreach (Rigidbody rigidbody in Rigidbodies)
+        {
+            rigidbody.AddForce(amountOfForce * hitPoint.normalized, ForceMode.Impulse);
         }
     }
 }

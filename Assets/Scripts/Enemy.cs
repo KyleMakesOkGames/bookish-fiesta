@@ -10,8 +10,6 @@ public class Enemy : MonoBehaviour
     public float health = 200f;
     public bool isDead = false;
 
-    public Collider hitbox;
-
     public Transform player;
     public NavMeshAgent agent;
     public Animator animator;
@@ -30,7 +28,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        hitbox.enabled = true;
         player = GameObject.Find("Player").transform;
     }
 
@@ -45,8 +42,6 @@ public class Enemy : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
-
-        //animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     private void Patroling()
@@ -108,7 +103,6 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        hitbox.enabled = false;
         animator.enabled = false;
         agent.enabled = false;
         humanoid.EnableRagdoll();

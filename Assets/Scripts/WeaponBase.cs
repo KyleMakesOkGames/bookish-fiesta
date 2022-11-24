@@ -14,14 +14,13 @@ public class WeaponBase : MonoBehaviour
     public bool isReloading = false;
     public bool shouldAim;
     public int damage;
+    public int damageMultiplier;
     public float weaponImpactForce;
-    public float range;
     public float fireRate;
     public int amountOfBulletsToShoot;
     public AudioSource source;
 
     public AudioClip shotSFX;
-    public AudioClip pickedUp;
 
     public FireMode fireMode = FireMode.FullAuto;
 
@@ -125,11 +124,20 @@ public class WeaponBase : MonoBehaviour
             {
                 StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
 
-                Enemy enemy = hit.transform.GetComponent<Enemy>();
+                Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
                 if(enemy != null)
                 {
                     enemy.TakeDamage(damage);
 
+                    if (hit.transform.gameObject.CompareTag("Head"))
+                    {
+                        enemy.TakeDamage(damage * damageMultiplier);
+                    }
+
+                    if(enemy.isDead)
+                    {
+                        enemy.GetComponentInParent<Ragdoll>().ApplyForceToRagdoll(Camera.main.transform.forward, weaponImpactForce);
+                    }
 
                 }
             }
