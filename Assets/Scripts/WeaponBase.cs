@@ -127,18 +127,12 @@ public class WeaponBase : MonoBehaviour
                 Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
                 if(enemy != null)
                 {
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(damage, weaponImpactForce, Camera.main.transform.forward);
 
                     if (hit.transform.gameObject.CompareTag("Head"))
                     {
-                        enemy.TakeDamage(damage * damageMultiplier);
+                        enemy.TakeDamage(damage * damageMultiplier, weaponImpactForce, Camera.main.transform.forward);
                     }
-
-                    if(enemy.isDead)
-                    {
-                        enemy.GetComponentInParent<Ragdoll>().ApplyForceToRagdoll(Camera.main.transform.forward, weaponImpactForce);
-                    }
-
                 }
             }
             else
