@@ -6,8 +6,9 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public float roundTime = 30;
+    public float roundTime = 90;
     public TMP_Text timerText;
+    public TMP_Text enemyCountText;
 
     private void Awake()
     {

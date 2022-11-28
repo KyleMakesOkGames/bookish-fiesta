@@ -1,10 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public static event Action<Enemy> OnEnemyKilled;
     public AIAgent agent;
     public float health = 200f;
     public bool isDead = false;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0f)
         {
             Die(direction, force);
+            OnEnemyKilled?.Invoke(this);
         }
     }
 
