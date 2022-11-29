@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - Loot
   - Head
+  - Body
+  - Limb
   layers:
   - Default
   - TransparentFX

@@ -13,8 +13,11 @@ public class WeaponBase : MonoBehaviour
     public bool fireLock = false;
     public bool isReloading = false;
     public bool shouldAim;
-    public int damage;
-    public int damageMultiplier;
+    [Header("Damage Multipliers")]
+    public float baseDamage;
+    public float headDamageMultiplier;
+    public float bodyDamageMultiplier;
+    public float limbDamageMultiplier;
     public float weaponImpactForce;
     public float fireRate;
     public int amountOfBulletsToShoot;
@@ -127,11 +130,17 @@ public class WeaponBase : MonoBehaviour
                 Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
                 if(enemy != null)
                 {
-                    enemy.TakeDamage(damage, weaponImpactForce, Camera.main.transform.forward);
-
                     if (hit.transform.gameObject.CompareTag("Head"))
                     {
-                        enemy.TakeDamage(damage * damageMultiplier, weaponImpactForce, Camera.main.transform.forward);
+                        enemy.TakeDamage(baseDamage * headDamageMultiplier, weaponImpactForce, bulletTransform.forward);
+                    }
+                    else if (hit.transform.gameObject.CompareTag("Body"))
+                    {
+                        enemy.TakeDamage(baseDamage * bodyDamageMultiplier, weaponImpactForce, bulletTransform.forward);
+                    }
+                    else if (hit.transform.gameObject.CompareTag("Limb"))
+                    {
+                        enemy.TakeDamage(baseDamage * limbDamageMultiplier, weaponImpactForce, bulletTransform.forward);
                     }
                 }
             }
