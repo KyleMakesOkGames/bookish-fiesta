@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3610bca64fe0743a4073f375cf5a6f, type: 3}
   m_Name: Default Config
   m_EditorClassIdentifier: 
-  maxTime: 0
-  maxDistance: 5
-  maxSightDistance: 10
+  maxTime: 1
+  maxDistance: 1
+  maxSightDistance: 0
