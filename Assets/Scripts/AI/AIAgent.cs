@@ -11,11 +11,13 @@ public class AIAgent : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public Ragdoll ragdoll;
     public AIAgentConfiguration config;
+    public Animator animator;
 
     private void Awake()
     {
         stateMachine = new AIStateMachine(this);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         ragdoll = GetComponent<Ragdoll>();
         stateMachine.RegisterState(new AIIdleState());
         stateMachine.RegisterState(new AIChasePlayerState());

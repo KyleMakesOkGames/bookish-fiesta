@@ -105,8 +105,8 @@ public class WeaponSwayAndBob : MonoBehaviour
         bobEulerRotation.z = (walkInput != Vector2.zero ? multiplier.z * curveCos * walkInput.x : 0);
     }
 
-    float smooth = 10f;
-    float smoothRot = 12f;
+    float smooth = 16;
+    float smoothRot = 32;
 
     private void CompositePositionRotation()
     {
